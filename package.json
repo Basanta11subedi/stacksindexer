@@ -1,0 +1,25 @@
+{
+  "name": "stacks-indexer",
+  "version": "1.0.0",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/index.js"
+    
+  },
+  "dependencies": {
+    "@stacks/blockchain-api-client": "^4.0.0",
+    "@stacks/network": "^4.0.0",
+    "@stacks/transactions": "^4.0.0",
+    "axios": "^1.7.9",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.1",
+    "express-rate-limit": "^6.0.0",
+    "helmet": "^5.0.0",
+    "mongoose": "^6.0.0",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
