@@ -10,6 +10,7 @@ class EventListener {
         this.apiUrl = process.env.STACKS_API_URL || 'https://api.hiro.so';
         this.pollingInterval = 10000; // 10 seconds
         this.activeIntervals = {};
+        this.offset = 0; // Track offset globally
     }
 
     async startPolling(contractAddress, contractName) {
@@ -62,8 +63,10 @@ class EventListener {
         try {
             const url = `${this.apiUrl}/extended/v1/contract/${contractId}/events`;
             const response = await axios.get(url, {
-                params: { limit, offset: 0 }
+                params: { limit, offset: this.offset } // Use dynamic offset
             });
+
+            this.offset += limit; // Increment offset after fetching
             return response.data.results || [];
         } catch (error) {
             if (error.response?.status === 404) {
@@ -79,6 +82,7 @@ class EventListener {
             delete this.activeIntervals[contractId];
         }
     }
+
     async fetchTransactionDetails(txId) {
         try {
             const response = await require('axios').get(`https://api.hiro.so/extended/v1/tx/${txId}`);
