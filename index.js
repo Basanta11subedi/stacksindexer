@@ -16,6 +16,10 @@ async function start() {
     
     // Parse JSON
     app.use(express.json());
+    app.use("/",(req,res)=>{
+        console.log("this is home calling");
+        res.send("<h1>this is stack backend</h1>");
+    })
     
     // Use our API routes
     app.use('/api', routes);
